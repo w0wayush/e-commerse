@@ -19,6 +19,8 @@ const itemSchema = new mongoose.Schema({
   published: Boolean,
 });
 
+// export const User = mongoose.model.User || mongoose.model("User", userSchema);
+
 export const User = mongoose.model("User", userSchema);
 export const Admin = mongoose.model("Admin", adminSchema);
 export const Item = mongoose.model("Course", itemSchema);
