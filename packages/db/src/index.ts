@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-// Define mongoose schemas
+
 const userSchema = new mongoose.Schema({
-  username: { type: String },
+  username: String,
   password: String,
-  purchasedItems: [{ type: mongoose.Schema.Types.ObjectId, ref: "Items" }],
+  purchasedItems: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
 });
 
 const adminSchema = new mongoose.Schema({
@@ -19,8 +19,11 @@ const itemSchema = new mongoose.Schema({
   published: Boolean,
 });
 
-// export const User = mongoose.model.User || mongoose.model("User", userSchema);
+export const User = mongoose.model.User || mongoose.model("User", userSchema);
+export const Admin =
+  mongoose.model.Admin || mongoose.model("Admin", adminSchema);
+export const Item = mongoose.model.Item || mongoose.model("Item", itemSchema);
 
-export const User = mongoose.model("User", userSchema);
-export const Admin = mongoose.model("Admin", adminSchema);
-export const Item = mongoose.model("Course", itemSchema);
+// export const User = mongoose.model("User", userSchema);
+// export const Admin = mongoose.model("Admin", adminSchema);
+// export const Item = mongoose.model("Item", itemSchema);

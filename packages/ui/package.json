@@ -6,7 +6,13 @@
     "./button": "./src/button.tsx",
     "./card": "./src/card.tsx",
     "./code": "./src/code.tsx",
-    "./signup": "./components/Signup.tsx"
+    "./signup": "./components/Signup.tsx",
+    "./signin": "./components/Signin.tsx",
+    "./additem": "./components/AddItem.tsx",
+    "./grayTopper": "./components/GrayTopper.tsx",
+    "./product": "./components/Product.tsx",
+    "./updateCard": "./components/UpdateCard.tsx",
+    "./updateCardTemplate": "./components/UpdateCardTemplate.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
