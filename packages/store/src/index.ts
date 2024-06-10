@@ -1,6 +1,5 @@
 export * from "./atoms/item";
 export * from "./atoms/user";
 
-export * from "./selectors/item";
-export * from "./selectors/isUserLoading";
-export * from "./selectors/userEmail";
+export * from "./selectors/itemSelectors";
+export * from "./selectors/userSelectors";
