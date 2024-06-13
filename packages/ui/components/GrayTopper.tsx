@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { itemTitle } from "../../store/src/selectors/item";
+import { itemTitle } from "store/src/selectors/itemSelectors";
 import { Typography } from "@mui/material";
 
 export function GrayTopper() {

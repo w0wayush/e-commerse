@@ -2,28 +2,41 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Item } from "db";
 import { ensureDbConnected } from "@/lib/dbConnect";
 
-type ItemData = {
-  itemId?: string;
-  message?: string;
+type CreateProductData = {
+  message: string;
+  productId?: string;
+  error?: string;
 };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ItemData>
+  res: NextApiResponse<CreateProductData>
 ) {
   try {
     await ensureDbConnected();
-    const { product, description, imageLink, price, published } = req.body;
-    const itemObj = { product, description, imageLink, price, published };
-    // console.log("Signup - ", obj);
-    const item = new Item(itemObj);
-    await item.save();
 
-    // const item = new Item(req.body);
-    // await item.save();
-    res.json({ message: "Item created successfully", itemId: item._id });
+    // Assuming req.body contains the necessary data for creating a product
+    const { product, description, price, imageLink, published } = req.body;
+
+    // Create a new item (product) based on the request data
+    const newItem = new Item({
+      product,
+      description,
+      price,
+      imageLink,
+      published,
+    });
+
+    // Save the new item to the database
+    await newItem.save();
+
+    // Respond with a success message and the new product's ID
+    res.status(201).json({
+      message: "Product created successfully",
+      productId: newItem.id,
+    });
   } catch (err) {
-    //     console.error(error);
+    console.error("Internal Server Error:", err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }

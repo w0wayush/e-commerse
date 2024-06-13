@@ -5,7 +5,7 @@ import {
   itemImage,
   itemPrice,
   itemTitle,
-} from "../../store/src/selectors/item";
+} from "store/src/selectors/itemSelectors";
 import { Card, Typography } from "@mui/material";
 
 export function Product() {
@@ -34,7 +34,7 @@ export function Product() {
           zIndex: 2,
         }}
       >
-        <img src={imageLink} style={{ width: 350 }}></img>
+        <img src={imageLink} style={{ width: 350 }} alt="Product" />
         <div style={{ marginLeft: 10 }}>
           <Typography variant="h5">{title}</Typography>
           <Typography variant="subtitle1">{description}</Typography>

@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilValue } from "recoil";
 import { itemState } from "../../store/src/atoms/item";
 import { Button, Card, TextField, Typography } from "@mui/material";
 
-export function UpdateCard(props) {
-  // const [itemDetails] = useRecoilState(itemState);
+export function UpdateCard(props: any) {
   const itemDetails = useRecoilValue(itemState);
-  const [product, setProduct] = useState(itemDetails.item.product);
-  const [description, setDescription] = useState(itemDetails.item.description);
-  const [image, setImage] = useState(itemDetails.item.imageLink);
-  const [price, setPrice] = useState(itemDetails.item.price);
+  const [product, setProduct] = useState(itemDetails?.item?.product || "");
+  const [description, setDescription] = useState(
+    itemDetails?.item?.description || ""
+  );
+  const [image, setImage] = useState(itemDetails?.item?.imageLink || "");
+  const [price, setPrice] = useState(itemDetails?.item?.price || "");
 
   const handleUpdate = () => {
     props.onClick(product, description, image, true, price);
   };
+
+  if (!itemDetails?.item) {
+    return <div>No item details available.</div>;
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>

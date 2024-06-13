@@ -88,7 +88,7 @@ function Appbar({}) {
         <div
           style={{ marginLeft: 10, cursor: "pointer" }}
           onClick={() => {
-            router.push("/");
+            router.push("/").then(() => router.reload());
           }}
         >
           <Typography variant={"h6"}>w0wVista</Typography>

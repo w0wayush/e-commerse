@@ -3,6 +3,7 @@ let alreadyDone = false;
 
 export async function ensureDbConnected() {
   if (alreadyDone) {
+    console.log("alreadyDone - ", alreadyDone);
     return;
   }
   const mongoUrl = process.env.MONGO_URL;
@@ -12,5 +13,6 @@ export async function ensureDbConnected() {
   }
 
   alreadyDone = true;
+  console.log("alreadyDone - ", alreadyDone);
   await mongoose.connect(mongoUrl);
 }

@@ -46,9 +46,9 @@ export default async function handler(
       throw new Error("Please add your JWT SECRET to .env.local");
     }
 
-    // const token = jwt.sign({ username, role: "admin" }, SECRET, {
-    //   expiresIn: "1h",
-    // });
+    /*  const token = jwt.sign({ username, role: "admin" }, SECRET, {
+      expiresIn: "1h",
+    }); */
 
     res.status(200).json({ message: "Admin created successfully" });
   } catch (error) {
