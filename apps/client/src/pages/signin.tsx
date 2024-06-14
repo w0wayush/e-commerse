@@ -2,25 +2,29 @@ import React from "react";
 import { Signin } from "@repo/ui/signin";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 
 export default function SigninPage() {
   const router = useRouter();
-  const handleSignin = async () => {
-    async (username: string, password: string) => {
-      const response = await axios.post("/api/signin", {
-        username,
-        password,
-      });
-      let data = response.data;
-      localStorage.setItem("token", data.token);
-      // window.location = "/"
-      //   setUser({ userEmail: email, isLoading: false });
-      router.push("/");
-    };
-  };
   return (
     <div>
-      <Signin onClick={handleSignin} />
+      <Signin
+        onClick={async (username, password) => {
+          try {
+            const response = await axios.post("/api/signin", {
+              username,
+              password,
+            });
+            const data = response.data;
+            localStorage.setItem("token", data.token);
+            router.push("/").then(() => router.reload());
+          } catch (error) {
+            console.error("Signin error:", error);
+            alert("Signin failed. Please try again.");
+          }
+        }}
+        nextAuthSignIn={(provider) => signIn(provider)}
+      />
     </div>
   );
 }

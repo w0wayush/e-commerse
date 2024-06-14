@@ -15,12 +15,14 @@ export default async function handler(
 ) {
   try {
     await ensureDbConnected();
+    console.log("db connected");
     const { username, password } = req.body;
 
     if (!username || !password) {
       return res.status(400).json({ message: "Please fill all the details" });
     }
 
+    console.log("In side signup");
     const admin = await Admin.findOne({ username });
 
     if (admin) {
@@ -36,6 +38,8 @@ export default async function handler(
       });
     }
 
+    console.log("Pass hasehed");
+
     const obj = { username: username, password: hashedPassword };
     // console.log("Signup - ", obj);
     const newAdmin = new Admin(obj);
@@ -49,6 +53,7 @@ export default async function handler(
     /*  const token = jwt.sign({ username, role: "admin" }, SECRET, {
       expiresIn: "1h",
     }); */
+    console.log("admin created");
 
     res.status(200).json({ message: "Admin created successfully" });
   } catch (error) {
