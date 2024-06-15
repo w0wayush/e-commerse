@@ -10,115 +10,69 @@ function Appbar({}) {
   const userEmail = useRecoilValue(userEmailState);
   const setUser = useSetRecoilState(userState);
 
-  // console.log("Useremail - ", userEmail);
-
   if (userLoading) {
     return <></>;
   }
 
-  if (userEmail) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: 4,
-          zIndex: 1,
-          margin: "25px",
-        }}
-      >
-        <div
-          style={{ marginLeft: 10, cursor: "pointer" }}
-          onClick={() => {
-            router.push("/");
-          }}
-        >
-          <Typography variant={"h6"}>w0wVista</Typography>
+  return (
+    <div className="bg-gray-800 shadow">
+      <div className="container mx-auto py-6 px-4 flex justify-between items-center">
+        <div className="cursor-pointer" onClick={() => router.push("/")}>
+          <Typography variant="h6" className="text-white">
+            w0wVista
+          </Typography>
         </div>
 
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10, display: "flex" }}>
-            <div style={{ marginRight: 10 }}>
+        <nav className="flex items-center">
+          {userEmail ? (
+            <>
               <Button
-                onClick={() => {
-                  router.push("/additems");
-                }}
+                onClick={() => router.push("/additems")}
+                className="text-white hover:text-gray-200 mr-4"
               >
                 Add New Product
               </Button>
-            </div>
-
-            <div style={{ marginRight: 10 }}>
               <Button
-                onClick={() => {
-                  router.push("/products");
-                }}
+                onClick={() => router.push("/products")}
+                className="text-white hover:text-gray-200 mr-4"
               >
                 View All Products
               </Button>
-            </div>
-
-            <Button
-              variant={"contained"}
-              onClick={() => {
-                localStorage.setItem("token", "");
-                setUser({
-                  isLoading: false,
-                  userEmail: null,
-                });
-              }}
-            >
-              Logout
-            </Button>
-          </div>
-        </div>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  localStorage.setItem("token", "");
+                  setUser({
+                    isLoading: false,
+                    userEmail: null,
+                  });
+                }}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                onClick={() => router.push("/signup")}
+                className="text-white hover:text-gray-200 mr-4"
+              >
+                Signup
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => router.push("/signin")}
+                className="text-white hover:text-gray-200"
+              >
+                Signin
+              </Button>
+            </>
+          )}
+        </nav>
       </div>
-    );
-  } else {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: 4,
-          zIndex: 1,
-          margin: "25px",
-        }}
-      >
-        <div
-          style={{ marginLeft: 10, cursor: "pointer" }}
-          onClick={() => {
-            router.push("/").then(() => router.reload());
-          }}
-        >
-          <Typography variant={"h6"}>w0wVista</Typography>
-        </div>
-
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10 }}>
-            <Button
-              variant={"contained"}
-              onClick={() => {
-                router.push("/signup");
-              }}
-            >
-              Signup
-            </Button>
-          </div>
-          <div>
-            <Button
-              variant={"contained"}
-              onClick={() => {
-                router.push("/signin");
-              }}
-            >
-              Signin
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Appbar;
