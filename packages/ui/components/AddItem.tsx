@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Button, Card, TextField } from "@mui/material";
 
 export function AddItem(props: {
@@ -7,8 +6,7 @@ export function AddItem(props: {
     product: string,
     description: string,
     image: string,
-    price: string,
-    published?: boolean
+    price: string
   ) => void;
 }) {
   const [product, setProduct] = useState("");
@@ -32,6 +30,7 @@ export function AddItem(props: {
         >
           <TextField
             style={{ marginBottom: 10 }}
+            value={product}
             onChange={(e) => {
               setProduct(e.target.value);
             }}
@@ -42,6 +41,7 @@ export function AddItem(props: {
 
           <TextField
             style={{ marginBottom: 10 }}
+            value={description}
             onChange={(e) => {
               setDescription(e.target.value);
             }}
@@ -52,6 +52,7 @@ export function AddItem(props: {
 
           <TextField
             style={{ marginBottom: 10 }}
+            value={image}
             onChange={(e) => {
               setImage(e.target.value);
             }}
@@ -62,6 +63,7 @@ export function AddItem(props: {
 
           <TextField
             style={{ marginBottom: 10 }}
+            value={price}
             onChange={(e) => {
               setPrice(e.target.value);
             }}
@@ -73,9 +75,12 @@ export function AddItem(props: {
           <Button
             size={"large"}
             variant="contained"
-            onClick={async () => {
+            onClick={() => {
               props.onClick(product, description, image, price);
-              alert("Added Product!");
+              setImage("");
+              setPrice("");
+              setDescription("");
+              setProduct("");
             }}
           >
             {" "}

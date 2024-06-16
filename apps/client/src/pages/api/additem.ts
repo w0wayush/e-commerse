@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Item } from "db";
 import { ensureDbConnected } from "@/lib/dbConnect";
+import { z } from "zod";
 
 type CreateProductData = {
   message: string;
