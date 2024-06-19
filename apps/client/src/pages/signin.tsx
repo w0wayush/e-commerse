@@ -16,11 +16,14 @@ export default function SigninPage() {
               password,
             });
             const data = response.data;
+            console.log("Signin data - ", data);
             localStorage.setItem("token", data.token);
             router.push("/").then(() => router.reload());
-          } catch (error) {
-            console.error("Signin error:", error);
-            alert("Signin failed. Please try again.");
+          } catch (error: any) {
+            // console.error("Signin error:", error.response.data.message.issues);
+            //@ts-ignore
+            const err = error.response.data.message.issues;
+            alert(`Signin Failed. Either wrong email or password too short}`);
           }
         }}
         nextAuthSignIn={(provider) => signIn(provider)}

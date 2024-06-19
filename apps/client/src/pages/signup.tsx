@@ -11,13 +11,20 @@ export default function SignupPage() {
     <div>
       <Signup
         onClick={async (username, password) => {
-          const response = await axios.post("/api/signup", {
-            username,
-            password,
-          });
-          let data = response.data;
-          localStorage.setItem("token", data.token);
-          router.push("/signin");
+          try {
+            const response = await axios.post("/api/signup", {
+              username,
+              password,
+            });
+            let data = response.data;
+            localStorage.setItem("token", data.token);
+            router.push("/signin");
+          } catch (erro: any) {
+            // console.error("Signup error:", error.response.data.message.issues);
+            //@ts-ignore
+            // const err = error.response.data.message.issues;
+            alert(`Signup Failed. Either wrong email or password too short}`);
+          }
         }}
         nextAuthSignIn={(provider) => signIn(provider)}
       />

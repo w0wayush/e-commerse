@@ -3,6 +3,7 @@ import { Admin } from "db";
 import jwt from "jsonwebtoken";
 import { ensureDbConnected } from "@/lib/dbConnect";
 import bcrypt from "bcrypt";
+import { signInput } from "common";
 
 type SignInData = {
   token?: string;
@@ -18,7 +19,14 @@ export default async function handler(
   try {
     await ensureDbConnected();
 
-    const { username, password } = req.body;
+    let parsedInput = signInput.safeParse(req.body);
+    if (!parsedInput.success) {
+      return res.status(403).json({
+        message: parsedInput.error,
+      });
+    }
+    const username = parsedInput.data.username;
+    const password = parsedInput.data.password;
 
     if (!username || !password) {
       return res.status(400).json({ message: "Please fill all the details" });
