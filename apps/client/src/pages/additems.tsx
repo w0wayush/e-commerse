@@ -6,7 +6,7 @@ export default function AddItems() {
   const handleAddItem = async (
     product: string,
     description: string,
-    image: string,
+    imageLink: string,
     price: string
   ) => {
     try {
@@ -15,7 +15,7 @@ export default function AddItems() {
         {
           product,
           description,
-          image,
+          imageLink,
           price,
           published: true,
         },

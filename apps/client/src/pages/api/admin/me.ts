@@ -7,6 +7,7 @@ type MeData = {
   message?: string;
 };
 
+/* Authenticate JWT */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<MeData>
@@ -17,7 +18,7 @@ export default async function handler(
     const authHeader = req.headers.authorization;
     if (authHeader) {
       const token = authHeader.split(" ")[1];
-      getUser(token, (user) => {
+      getUser(token, (user: any) => {
         if (!user) {
           return res.status(403).json({});
         }
@@ -29,5 +30,3 @@ export default async function handler(
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
-/* Authenticate JWT */

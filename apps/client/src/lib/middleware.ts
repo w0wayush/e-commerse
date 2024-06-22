@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const getUser = async (token: string, cb) => {
+export const getUser = async (token: string, cb: any) => {
   //cb = callback function defined in api/admin/me route
   const SECRET = process.env.JWT_SECRET;
   if (!SECRET) {
