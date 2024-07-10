@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import { UpdateCard } from "./UpdateCard";
 import { Product } from "./Product";
 
-export function UpdateCardTemplate(props) {
+export default function UpdateCardTemplate(props: { onClick: () => void }) {
   return (
     <div>
       <Grid container>

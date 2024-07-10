@@ -21,6 +21,7 @@ export default async function handler(
     let parsedInput = signInput.safeParse(req.body);
     if (!parsedInput.success) {
       return res.status(403).json({
+        //@ts-ignore
         message: parsedInput.error,
       });
     }
